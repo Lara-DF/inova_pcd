@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="InovaPCD - Capacitação profissional e inclusão no mercado de trabalho para pessoas com deficiência (PCD)">
+    <title>InovaPCD | Capacitação e Inclusão Profissional para PCDs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styleIndex.css">
+</head>
+<body>
+    <!-- Skip Link -->
+
+    <!-- Barra de Acessibilidade -->
+    <div class="accessibility-bar">
+        <div class="accessibility-container">
+            <button class="accessibility-tool" id="increaseFont" aria-label="Aumentar tamanho da fonte">
+                <i class="fas fa-search-plus" aria-hidden="true"></i>
+                <span>Aumentar Fonte</span>
+            </button>
+            <button class="accessibility-tool" id="decreaseFont" aria-label="Diminuir tamanho da fonte">
+                <i class="fas fa-search-minus" aria-hidden="true"></i>
+                <span>Diminuir Fonte</span>
+            </button>
+            <button class="accessibility-tool" id="highContrast" aria-label="Ativar alto contraste">
+                <i class="fas fa-adjust" aria-hidden="true"></i>
+                <span>Alto Contraste</span>
+            </button>
+            <button class="accessibility-tool" id="normalContrast" aria-label="Voltar ao contraste normal">
+                <i class="fas fa-circle" aria-hidden="true"></i>
+                <span>Contraste Normal</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Cabeçalho com Logo -->
+    <header>
+        <nav aria-label="Navegação principal">
+            <a href="index.html" class="logo">
+                <div class="logo-img">
+                    <img src="LOGO2.jpg" alt="Logo InovaPCD"> <!-- Certifique-se que 'logo-inovapcd.png' está na mesma pasta -->
+                </div>
+                <div class="logo-text">
+                    <h1>InovaPCD</h1>
+                    <span>Capacita, Inclui e Transforma</span>
+                </div>
+            </a>
+
+            <ul class="nav-links" id="nav-links" role="menubar">
+                <li role="none"><a href="sobre_nos.html" role="menuitem">Sobre Nós</a></li>
+                <!-- <li role="none"><a href="#services" role="menuitem">Serviços</a></li> -->
+                <li role="none"><a href="cursos.html" role="menuitem">Cursos</a></li>
+                <li role="none"><a href="contato2.html" role="menuitem">Contato</a></li>
+                <!-- <li role="none"><a href="#formulario-inscricao" class="btn-nav" role="menuitem">Inscreva-se</a></li> -->
+            </ul>
+
+            <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content" id="main-content">
+            <h1>Tecnologia <span>Inclusiva</span> para PCDs</h1>
+            <p>Bem-vindo ao InovaPCD – Onde sua Jornada de Capacitação e Autoconhecimento é possível!</p>
+            <div class="hero-buttons">
+                <a href="#about" class="btn">Conheça nossa história</a>
+                <a href="#formulario-inscricao" class="btn btn-outline">Inscreva-se agora</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Menu Mobile
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', !isExpanded);
+
+            // Adiciona/remove o event listener para fechar o menu ao clicar fora
+            if (!isExpanded) {
+                document.addEventListener('click', closeMenuOnClickOutside);
+            } else {
+                document.removeEventListener('click', closeMenuOnClickOutside);
+            }
+        });
+
+        function closeMenuOnClickOutside(e) {
+            if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                document.removeEventListener('click', closeMenuOnClickOutside);
+            }
+        }
+
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) { // Somente se o menu estiver ativo (mobile)
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    document.removeEventListener('click', closeMenuOnClickOutside);
+                }
+            });
+        });
+
+        // Acessibilidade - Tamanho da fonte
+        const body = document.body;
+        const increaseFontBtn = document.getElementById('increaseFont');
+        const decreaseFontBtn = document.getElementById('decreaseFont');
+        let currentFontClass = '';
+
+        // Função para aplicar a classe de tamanho de fonte
+        function applyFontSize(className) {
+            if (currentFontClass) {
+                body.classList.remove(currentFontClass);
+            }
+            if (className) {
+                body.classList.add(className);
+                currentFontClass = className;
+                localStorage.setItem('fontSizeClass', className);
+            } else {
+                currentFontClass = '';
+                localStorage.removeItem('fontSizeClass');
+            }
+        }
+
+        increaseFontBtn.addEventListener('click', function() {
+            if (currentFontClass === 'font-size-1') {
+                applyFontSize('font-size-2');
+            } else if (currentFontClass === '') {
+                applyFontSize('font-size-1');
+            }
+        });
+
+        decreaseFontBtn.addEventListener('click', function() {
+            if (currentFontClass === 'font-size-2') {
+                applyFontSize('font-size-1');
+            } else if (currentFontClass === 'font-size-1') {
+                applyFontSize(''); // Volta ao normal
+            }
+        });
+
+        // Acessibilidade - Contraste
+        document.getElementById('highContrast').addEventListener('click', function() {
+            document.body.classList.add('high-contrast');
+            localStorage.setItem('highContrast', 'true');
+        });
+
+        document.getElementById('normalContrast').addEventListener('click', function() {
+            document.body.classList.remove('high-contrast');
+            localStorage.removeItem('highContrast');
+             // Resetar tamanho da fonte para padrão ao voltar ao contraste normal se desejado
+            // applyFontSize(''); // Descomente se quiser resetar a fonte também
+        });
+
+        // Verificar preferências salvas ao carregar a página
+        window.addEventListener('DOMContentLoaded', () => {
+            // Contraste
+            if (localStorage.getItem('highContrast') === 'true') {
+                document.body.classList.add('high-contrast');
+            }
+
+            // Tamanho da fonte
+            const savedFontSizeClass = localStorage.getItem('fontSizeClass');
+            if (savedFontSizeClass) {
+                applyFontSize(savedFontSizeClass);
+            }
+        });
+
+        // Suave rolagem para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#' || targetId.length <= 1) return; // Ignora href="#" ou href=""
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+
+                    // Se for mobile com menu aberto, fecha o menu primeiro
+                    if (window.innerWidth <= 768 && navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        hamburger.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.removeEventListener('click', closeMenuOnClickOutside);
+
+                        // Espera a animação do menu fechar antes de rolar
+                        setTimeout(() => {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }, 300);
+                    } else {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

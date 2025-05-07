@@ -1,0 +1,93 @@
+body{
+    background-color: #32477a;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+}
+html, body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.btnini{
+    border-radius: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #fdfdfd;
+    margin: 5px;
+    text-align: center;
+    
+    
+}
+.titulo {
+    width: 100%;
+    height: 100px;
+    background-color: #000038;
+    display: flex;
+    border-bottom:3px solid #ff6822;
+    color: #ff6822;
+    align-items:center;
+    justify-items: center;
+}
+.titulo h1{
+    color: #ff6822;
+    margin: auto;
+    font-size: 35px;
+}
+
+h2{
+    text-align: center;
+    color: #ff6822;
+}
+p.descricao{
+    color: #ffffff;
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}
+p{
+    color: #ffffff;
+    text-align: center;
+}
+.imagens{
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    width: 100%;
+    padding: 30px;
+    height: 330px;
+    background-color: #000038;
+    align-items: center;
+
+}
+.imagens img{
+    height: 150px;
+    width: auto;
+}
+.lara{
+    text-align: center;
+}
+.lara img {
+    border-radius: 10px;
+    border: 7px solid #ff8b55;
+}
+.douglas{
+    text-align: center;
+}
+.douglas img {
+    border-radius: 10px;
+    border: 7px solid #ff8b55;
+}
+.ana{
+    text-align: center;
+}
+.ana img {
+    border-radius: 10px;
+    border: 7px solid #ff8b55;
+}
+.guilherme{
+    text-align: center;
+}
+.guilherme img {
+    border-radius: 10px;
+    border: 7px solid #ff8b55;
+}

@@ -1,0 +1,526 @@
+:root {
+    --primary: #000038;
+    --secondary: #3E92CC;
+    --accent: #ff6822;
+    --accent-dark: #e55c1d;
+    --text: #ffffff;
+    --text-secondary: #e0e0e0;
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --section-bg: #1A1A2E;
+    --accessibility-bg: #16213E;
+    --focus-outline: 3px solid #FFA500;
+
+    /* Tamanhos de fonte base */
+    --font-normal: 1rem;
+    --font-large: 1.2rem;
+    --font-xlarge: 1.5rem;
+}
+
+/* Tamanhos de fonte alternativos */
+.font-size-1 {
+    --font-normal: 1.2rem;
+    --font-large: 1.5rem;
+    --font-xlarge: 1.8rem; /* Ajustado para não ser tão grande */
+}
+
+.font-size-2 {
+    --font-normal: 1.4rem; /* Ajustado para não ser tão grande */
+    --font-large: 1.8rem;
+    --font-xlarge: 2.2rem;
+}
+
+* {/* Modo alto contraste */
+.high-contrast {
+    --primary: #000000;
+    --secondary: #0000FF; /* Cor secundária mais vibrante para contraste */
+    --accent: #FFFF00; /* Amarelo para destaque */
+    --accent-dark: #DDDD00; /* Amarelo mais escuro para hover */
+    --text: #FFFFFF;
+    --text-secondary: #FFFFFF;
+    --card-bg: rgba(0, 0, 0, 0.5); /* Fundo de card mais escuro */
+    --section-bg: #000000;
+    --accessibility-bg: #000000;
+    --focus-outline: 3px solid #FFFF00; /* Contorno de foco amarelo */
+
+    /* Ajustes específicos para alto contraste */
+    background-color: var(--section-bg) !important;
+    color: var(--text) !important;
+}
+
+.high-contrast a,
+.high-contrast button,
+.high-contrast .accessibility-tool {
+    color: var(--text) !important;
+    border-color: var(--text) !important; /* Adiciona borda para botões sem fundo */
+}
+
+.high-contrast .btn,
+.high-contrast .btn-nav {
+    background-color: var(--accent) !important;
+    color: #000000 !important; /* Texto preto em botões amarelos para legibilidade */
+    border-color: var(--accent) !important;
+}
+.high-contrast .btn:hover,
+.high-contrast .btn-nav:hover {
+    background-color: var(--accent-dark) !important;
+    color: #000000 !important;
+}
+
+.high-contrast .btn-outline {
+    background-color: transparent !important;
+    color: var(--accent) !important;
+    border-color: var(--accent) !important;
+}
+.high-contrast .btn-outline:hover {
+    background-color: var(--accent) !important;
+    color: #000000 !important;
+}
+
+.high-contrast .logo-text h1 {
+    color: var(--text) !important;
+}
+.high-contrast .logo-text span,
+.high-contrast .hero h1 span {
+    color: var(--accent) !important;
+}
+.high-contrast .nav-links a:hover,
+.high-contrast .nav-links a.active {
+    color: var(--accent) !important;
+}
+.high-contrast .nav-links a::after {
+    background: var(--accent) !important;
+}
+
+.high-contrast .logo-img {
+    border-color: var(--accent) !important;
+    background-color: #000 !important; /* Fundo preto para logo em alto contraste */
+}
+
+.high-contrast .hero {
+    background: var(--section-bg) !important; /* Fundo sólido para o hero */
+}
+
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--section-bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+    font-size: var(--font-normal);
+}
+
+h1, h2, h3, h4 {
+    line-height: 1.3;
+}
+
+a, button {
+    transition: all 0.3s ease;
+}
+
+a:focus, button:focus {
+    outline: var(--focus-outline);
+    outline-offset: 3px;
+}
+
+/* Barra de Acessibilidade */
+.accessibility-bar {
+    background-color: var(--accessibility-bg);
+    padding: 10px 0;
+    font-size: var(--font-normal); /* Herda da classe de tamanho de fonte */
+}
+
+.accessibility-container {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.accessibility-tool {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text);
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background: none;
+    border: none;
+    font-size: inherit; /* Garante que herde o tamanho da fonte corretamente */
+}
+
+.accessibility-tool:hover {
+    color: var(--accent);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.accessibility-tool i {
+    font-size: 1.1em; /* Relativo ao font-size do botão */
+}
+
+/* Skip Link */
+.skip-link {
+    position: absolute;
+    top: -100px; /* Escondido mais efetivamente */
+    left: 0;
+    background: var(--accent);
+    color: var(--text);
+    padding: 10px 15px;
+    z-index: 2000; /* Mais alto que o header */
+    transition: top 0.3s;
+    border-radius: 0 0 5px 0;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: var(--focus-outline);
+}
+
+/* Header */
+header {
+    background-color: var(--primary);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 3px solid var(--accent);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo-img {
+    width: auto;
+    height: 60px;
+    border-radius: 10%;
+    border: 3px solid var(--accent);
+    object-fit: cover;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.logo-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.logo-text h1 {
+    color: var(--text);
+    font-size: var(--font-xlarge);
+    font-weight: 700;
+}
+
+.logo-text span {
+    color: var(--accent);
+    display: block;
+    font-size: var(--font-normal); /* Ajustado para usar variável */
+    font-weight: 400;
+}
+
+/* Menu Principal */
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    padding: 5px 0;
+    font-size: var(--font-normal); /* Ajustado para usar variável */
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background: var(--accent);
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-links .btn-nav {
+    background-color: var(--accent);
+    color: var(--text);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-normal); /* Para consistência com outros links */
+}
+
+.nav-links .btn-nav:hover {
+    background-color: var(--accent-dark);
+    transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(10, 36, 99, 0.8), rgba(10, 36, 99, 0.8)),
+                url('https://images.unsplash.com/photo-1543964198-d54e4f0e44e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+    background-size: cover;
+    background-position: center;
+    padding: 120px 20px;
+    text-align: center;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    animation: fadeIn 1s ease;
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem); /* Usa clamp para responsividade */
+    margin-bottom: 20px;
+    color: var(--text);
+    line-height: 1.2;
+}
+
+.hero h1 span {
+    color: var(--accent);
+}
+
+.hero p {
+    font-size: clamp(1rem, 2vw, 1.2rem); /* Usa clamp para responsividade */
+    margin-bottom: 30px;
+    color: var(--text-secondary);
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Botões */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent);
+    color: var(--text);
+    padding: 14px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 2px solid transparent;
+    font-size: 1.1rem; /* Tamanho fixo, pode ser var(--font-large) */
+    cursor: pointer;
+    min-width: 200px;
+}
+
+.btn:hover {
+    background-color: var(--accent-dark);
+    transform: translateY(-3px);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--accent);
+}
+
+.btn-outline:hover {
+    background-color: var(--accent);
+}
+
+/* Menu Hamburguer */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 1001;
+    background: none;
+    border: none;
+    padding: 10px;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px;
+    background-color: var(--text);
+    transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+    .nav-links {
+        gap: 20px;
+    }
+    .logo-text h1 {
+        font-size: var(--font-large); /* Ajuste para telas menores */
+    }
+    .logo-text span {
+        font-size: calc(var(--font-normal) * 0.9);
+    }
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0; /* Começa no topo do header */
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background-color: var(--primary);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        transition: right 0.5s ease-in-out; /* Transição apenas em 'right' */
+        z-index: 999;
+        padding: 20px;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        padding-top: 80px; /* Espaço para o header fixo */
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .accessibility-container {
+        justify-content: center;
+        gap: 10px; /* Menor espaçamento em telas pequenas */
+    }
+    .accessibility-tool span {
+        display: none; /* Oculta texto em telas muito pequenas, opcional */
+    }
+    @media (min-width: 481px) { /* Mostra texto se houver espaço */
+        .accessibility-tool span {
+            display: inline;
+        }
+    }
+
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-text h1 {
+        font-size: 1.3rem; /* Ajustado para não ser muito pequeno */
+    }
+
+    .logo-text span {
+        font-size: 0.8rem;
+    }
+    .logo-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 280px; /* Evita que o botão ocupe a tela inteira se for muito largo */
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+
+    .hero h1 {
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
+    }
+    .hero p {
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+    }
+    .accessibility-tool {
+        padding: 5px;
+    }
+    .accessibility-tool i {
+        font-size: 1rem;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .hero-content {
+        animation: none;
+    }
+
+    .btn:hover, .nav-links .btn-nav:hover {
+        transform: none;
+    }
+}

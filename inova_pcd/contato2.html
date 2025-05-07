@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InovaPCD | Acessibilidade para PCDs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <style>
+        :root {
+            --primary: #0A2463;
+            --secondary: #3E92CC;
+            --accent: #FF7B25;
+            --accent-dark: #D16020;
+            --text: #FFFFFF;
+            --text-secondary: #D3D3D3;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --section-bg: #1A1A2E;
+            --accessibility-bg: #16213E;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--section-bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Barra de Acessibilidade */
+        .accessibility-bar {
+            background-color: var(--accessibility-bg);
+            padding: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .accessibility-container {
+            display: flex;
+            justify-content: flex-end;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .accessibility-tool {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .accessibility-tool:hover {
+            color: var(--accent);
+        }
+
+        .accessibility-tool i {
+            font-size: 1.1rem;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--accent);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+        }
+        
+        .logo-text h1 {
+            color: var(--text);
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        
+        .logo-text span {
+            color: var(--accent);
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        /* Menu Principal */
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+            font-size: 1.05rem;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: var(--accent);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(10, 36, 99, 0.8), rgba(10, 36, 99, 0.8)), 
+                        url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-secondary);
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--accent);
+            color: var(--text);
+            padding: 14px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            font-size: 1.1rem;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 123, 37, 0.4);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--accent);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--accent);
+        }
+
+        /* Seções */
+        .section {
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .section-title {
+            text-align:center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text);
+            margin-bottom: 15px;
+        }
+
+        .section-title h2 span {
+            color: var(--accent);
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .missao-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .missao-lista {
+            list-style-type: none;
+            padding-left: 0;
+            line-height: 1.8;
+        }
+
+        .missao-lista li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .missao-lista span:first-child {
+            margin-right: 10px;
+        }
+
+        .missao-lista strong {
+            color: var(--accent);
+        }
+
+        /* Seção Entendendo os PCDs */
+        #pcd-info {
+            background-color: var(--accessibility-bg);
+        }
+
+        .pcd-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .pcd-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--accent);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .pcd-card:nth-child(2) {
+            border-left-color: var(--secondary);
+        }
+
+        .pcd-card:nth-child(3) {
+            border-left-color: var(--primary);
+        }
+
+        .pcd-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .pcd-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .pcd-card:nth-child(2) .pcd-icon {
+            color: var(--secondary);
+        }
+
+        .pcd-card:nth-child(3) .pcd-icon {
+            color: var(--primary);
+        }
+
+        .pcd-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .pcd-card p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .pcd-card ul {
+            color: var(--text-secondary);
+            padding-left: 20px;
+            margin-bottom: 15px;
+            list-style-type: none;
+        }
+
+        .pcd-card ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .pcd-card ul li:before {
+            content: "•";
+            color: var(--accent);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+
+        .pcd-card:nth-child(2) ul li:before {
+            color: var(--secondary);
+        }
+
+        /* Tipos de deficiência */
+        .deficiency-types {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .deficiency-item {
+            background-color: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .deficiency-item:hover {
+            transform: translateY(-3px);
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .deficiency-item:nth-child(2) {
+            border-left-color: var(--secondary);
+        }
+
+        .deficiency-item:nth-child(3) {
+            border-left-color: #4CAF50;
+        }
+
+        .deficiency-item:nth-child(4) {
+            border-left-color: #FFC107;
+        }
+
+        .deficiency-item:nth-child(5) {
+            grid-column: span 2;
+            border-left-color: #9C27B0;
+        }
+
+        .deficiency-item h4 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .deficiency-item:nth-child(2) h4 {
+            color: var(--secondary);
+        }
+
+        .deficiency-item:nth-child(3) h4 {
+            color: #4CAF50;
+        }
+
+        .deficiency-item:nth-child(4) h4 {
+            color: #FFC107;
+        }
+
+        .deficiency-item:nth-child(5) h4 {
+            color: #9C27B0;
+        }
+
+        .deficiency-item p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        /* Estatísticas */
+        .pcd-stats {
+            max-width: 1000px;
+            margin: 50px auto 0;
+            background-color: var(--primary);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(10, 36, 99, 0.3);
+        }
+
+        .pcd-stats h3 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--text);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-item {
+            padding: 15px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Cards de Serviços */
+        .services-section {
+            padding: 60px 20px;
+            background: #f9f9f9;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .section-header h2 span {
+            color: #2C7BE5;
+        }
+
+        .section-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .service-card.featured {
+            border-top: 4px solid #2C7BE5;
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            color: #2C7BE5;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .categories-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .category-tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .highlights-box {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 15px 0;
+        }
+
+        .highlights-box p {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .highlights-box i {
+            color: #4CAF50;
+        }
+
+        .card-button {
+            display: inline-block;
+            background: #f0f4f8;
+            color: #2C7BE5;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .card-button:hover {
+            background: #2C7BE5;
+            color: white;
+        }
+
+        .card-button.primary {
+            background: #2C7BE5;
+            color: white;
+        }
+
+        .card-button.primary:hover {
+            background: #1a5bbf;
+        }
+
+        /* Depoimentos */
+        .testimonials {
+            background-color: var(--accessibility-bg);
+            padding: 80px 20px;
+        }
+
+        .testimonial-slider {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 15px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            color: var(--accent);
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .testimonial-author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .author-info h4 {
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Formulário de Inscrição */
+        .registration {
+            background-color: var(--primary);
+            padding: 80px 20px;
+        }
+
+        .registration-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        select, select option {
+            color: #000000;
+            background-color: #FFFFFF;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 123, 37, 0.2);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--primary);
+            padding: 60px 20px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--text);
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: var(--text);
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Acessibilidade */
+        .high-contrast {
+            --primary: #000000;
+            --secondary: #FFFFFF;
+            --accent: #FFFF00;
+            --text: #FFFFFF;
+            --text-secondary: #CCCCCC;
+            --card-bg: #222222;
+            --section-bg: #000000;
+            --accessibility-bg: #111111;
+        }
+
+        .font-size-1 {
+            font-size: 1.2rem;
+        }
+
+        .font-size-2 {
+            font-size: 1.4rem;
+        }
+
+        /* Mensagens do formulário */
+        .form-message {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+
+        .form-message.success {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            display: block;
+        }
+
+        .form-message.error {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+            display: block;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background-color: var(--primary);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: all 0.5s;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .registration-form {
+                padding: 30px 20px;
+            }
+
+            .pcd-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .deficiency-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .deficiency-item:nth-child(5) {
+                grid-column: span 1;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .pcd-stats {
+                padding: 30px 20px;
+            }
+
+            .services-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de Acessibilidade -->
+    <div class="accessibility-bar">
+        <div class="accessibility-container">
+            <div class="accessibility-tool" id="increaseFont">
+                <i class="fas fa-font"></i>
+                <span>Aumentar Fonte</span>
+            </div>
+            <div class="accessibility-tool" id="decreaseFont">
+                <i class="fas fa-font"></i>
+                <span>Diminuir Fonte</span>
+            </div>
+            <div class="accessibility-tool" id="highContrast">
+                <i class="fas fa-adjust"></i>
+                <span>Alto Contraste</span>
+            </div>
+            <div class="accessibility-tool" id="normalContrast">
+                <i class="fas fa-circle"></i>
+                <span>Contraste Normal</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cabeçalho -->
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <img src="LOGO2.jpg" alt="Logo InovaPCD">
+                <div class="logo-text">
+                    <h1>InovaPCD</h1>
+                    <span>Capacita, Inclui e Transforma</span>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="sobre_nos.html">Sobre nós</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <!-- <li><a href="contato2.html">Contato</a></li> -->
+                <li>
+                    <a href="#formulario-inscricao">
+                      <button class="btn">Inscreva-se</button>
+                    </a>
+                  </li>
+            </ul>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Tecnologia <span>Inclusiva</span> para PCDs</h1>
+            <p>Bem-vindo ao InovaPCD – Onde sua Jornada de Capacitação e Autoconhecimento é possível!</p>
+            <div>
+                <a href="#about" class="btn">Nossa história</a>
+                <a href="#formulario-inscricao" class="btn btn-outline">Inscreva-se</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nossa história -->
+    <section class="section" id="about">
+        <div class="section-title">
+            <h2>Nossa <span>História</span></h2>
+            <p>A InovaPCD é uma empresa dedicada a promover a Capacitação profissional e o Desenvolvimento pessoal de pessoas com deficiência. Criada em 2025, nascemos da crença de que a inclusão se constrói através de oportunidades reais e da valorização do potencial humano.</p>
+            <p>Nosso compromisso é oferecer soluções inovadoras e acessíveis, que respeitem as individualidades de cada pessoa. Trabalhamos com uma equipe multidisciplinar, composta por profissionais com deficiência e especialistas em acessibilidade, para garantir que nossos serviços sejam verdadeiramente inclusivos.</p>
+            <p>E nossos valores são a inclusão, a acessibilidade, a autonomia e a inovação.</p>
+        </div>
+
+        <div class="missao-container">
+            <h2>Missão</h2>
+            <p>Nossa missão vai além da qualificação técnica, nós:</p>
+            <ul class="missao-lista">
+                <li>
+                    <span aria-hidden="true">🔹</span>
+                    <span>Oferecemos <strong>cursos adaptados</strong> às necessidades específicas de cada pessoa</span>
+                </li>
+                <li>
+                    <span aria-hidden="true">🔹</span>
+                    <span>Desenvolvemos <strong>habilidades socioemocionais</strong> para fortalecer a autoconfiança</span>
+                </li>
+                <li>
+                    <span aria-hidden="true">🔹</span>
+                    <span>Conectamos talentos com o <strong>mercado de trabalho</strong> através de parcerias estratégicas</span>
+                </li>
+                <li>
+                    <span aria-hidden="true">🔹</span>
+                    <span>Utilizamos <strong>tecnologia assistiva</strong> para uma experiência 100% acessível</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Seção Entendendo os PCDs -->
+    <section class="section" id="pcd-info">
+        <div class="section-title">
+            <h2>Entendendo os <span>PCDs</span></h2>
+            <p>Conheça mais sobre as Pessoas com Deficiência e a importância da inclusão</p>
+        </div>
+
+        <div class="pcd-container">
+            <!-- Card 1: O que são PCDs -->
+            <div class="pcd-card">
+                <div class="pcd-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <h3>O que são PCDs?</h3>
+                <p>
+                    PCD significa <strong>Pessoa com Deficiência</strong>, termo utilizado para se referir a indivíduos que têm impedimentos de longo prazo de natureza física, mental, intelectual ou sensorial.
+                </p>
+                <p>
+                    A terminologia "PCD" foi adotada no Brasil a partir da Lei Brasileira de Inclusão (LBI - Lei 13.146/2015), substituindo expressões anteriores como "portadores de deficiência", que não refletiam adequadamente a relação entre a pessoa e sua deficiência.
+                </p>
+            </div>
+
+            <!-- Card 2: Por que o nome PCD -->
+            <div class="pcd-card">
+                <div class="pcd-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <h3>Por que "PCD"?</h3>
+                <p>
+                    O termo "Pessoa com Deficiência" (PCD) foi adotado seguindo a Convenção sobre os Direitos das Pessoas com Deficiência da ONU, que enfatiza:
+                </p>
+                <ul>
+                    <li>A <strong>pessoa vem primeiro</strong>, não sua deficiência</li>
+                    <li>A deficiência é uma <strong>característica</strong>, não define o indivíduo</li>
+                    <li>Reflete o modelo social da deficiência, que vê as barreiras sociais como os principais limitadores</li>
+                </ul>
+            </div>
+
+            <!-- Card 3: Tipos de Deficiência -->
+            <div class="pcd-card">
+                <div class="pcd-icon">
+                    <i class="fas fa-wheelchair"></i>
+                </div>
+                <h3>Deficiências Reconhecidas</h3>
+                <p>
+                    Segundo a legislação brasileira, as deficiências se enquadram nas seguintes categorias:
+                </p>
+                
+                <div class="deficiency-types">
+                    <div class="deficiency-item">
+                        <h4>Física</h4>
+                        <p>Amputações, paraplegia, má formação, etc.</p>
+                    </div>
+                    
+                    <div class="deficiency-item">
+                        <h4>Visual</h4>
+                        <p>Cegueira, baixa visão, daltonismo, etc.</p>
+                    </div>
+                    
+                    <div class="deficiency-item">
+                        <h4>Auditiva</h4>
+                        <p>Surdez, perda auditiva, etc.</p>
+                    </div>
+                    
+                    <div class="deficiency-item">
+                        <h4>Intelectual</h4>
+                        <p>Síndrome de Down, autismo, etc.</p>
+                    </div>
+                    
+                    <div class="deficiency-item">
+                        <h4>Múltipla</h4>
+                        <p>Combinação de duas ou mais deficiências</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="pcd-stats">
+            <h3>Dados sobre PCDs no Brasil</h3>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">24%</div>
+                    <div class="stat-desc">da população brasileira tem algum tipo de deficiência</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">1%</div>
+                    <div class="stat-desc">das vagas em empresas com 100+ funcionários devem ser para PCDs</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">53%</div>
+                    <div class="stat-desc">das PCDs estão fora do mercado de trabalho</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<section>
+
+    <!-- Serviços -->
+    <section class="services-section" id="services">
+        <div class="section-header">
+            <h2>Explorar <span>cursos</span></h2>
+            <p class="section-subtitle">Conheça nossos serviços especialmente desenvolvidos para atender às necessidades de pessoas com deficiência.</p>
+        </div>
+        
+        <div class="services-container">
+            <!-- Acessibilidade Digital -->
+            <div class="service-card">
+                <div class="card-icon">
+                    <i class="fas fa-universal-access"></i>
+                </div>
+                <h3>Acessibilidade Digital</h3>
+                <p>Recursos de acessibilidade adaptados para diversos tipos de deficiência.</p>
+                <a href="#" class="card-button">Saiba mais</a>
+            </div>
+    
+            <!-- Cursos Inclusivos -->
+            <div class="service-card featured">
+                <div class="card-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Cursos Inclusivos</h3>
+                <p>Capacitação profissional e desenvolvimento de habilidades socioemocionais.</p>
+                
+                <div class="categories-wrapper">
+                    <span class="category-tag">Tecnologia</span>
+                    <span class="category-tag">Administrativo</span>
+                    <span class="category-tag">Saúde</span>
+                    <span class="category-tag">Socioemocional</span>
+                </div>
+                
+                <div class="highlights-box">
+                    <p><i class="fas fa-check-circle"></i> Preparatório para Entrevistas</p>
+                    <p><i class="fas fa-check-circle"></i> Libras para o Mercado</p>
+                </div>
+            </section>
+
+
+ <!-- Rodapé -->
+ <footer id="contact">
+    <div class="footer-content">
+        <div class="footer-column">
+            <h3>Inclusão Digital</h3>
+            <p>Promovendo acessibilidade e inclusão através da tecnologia desde 2015.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        
+        <div class="footer-column">
+            <h3>Links Rápidos</h3>
+            <ul class="footer-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#services">Serviços</a></li>
+                <li><a href="#registration">Inscrição</a></li>
+                <li><a href="#testimonials">Depoimentos</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column">
+            <h3>Serviços</h3>
+            <ul class="footer-links">
+                <li><a href="#">Acessibilidade Digital</a></li>
+                <li><a href="#">Cursos Inclusivos</a></li>
+                <li><a href="#">Consultoria</a></li>
+                <li><a href="#">Recrutamento Inclusivo</a></li>
+                <li><a href="#">Desenvolvimento de Softwares</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column">
+            <h3>Contato</h3>
+            <ul class="footer-links">
+                <li><i class="fas fa-map-marker-alt"></i> Rua da Inclusão, 123 - São Paulo/SP</li>
+                <li><i class="fas fa-phone-alt"></i> (11) 9999-9999</li>
+                <li><i class="fas fa-envelope"></i> contato@inclusaodigital.com.br</li>
+                <li><i class="fas fa-clock"></i> Seg-Sex: 9h às 18h</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>&copy; 2023 Inclusão Digital. Todos os direitos reservados.</p>
+    </div>
+</footer>
